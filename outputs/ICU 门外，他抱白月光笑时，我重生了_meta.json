@@ -1,0 +1,122 @@
+{
+  "novel_info": {
+    "title": "ICU 门外，他抱白月光笑时，我重生了",
+    "category": "女频-追妻火葬场",
+    "tone": "虐恋爽感",
+    "creation_date": "2026-03-18",
+    "word_count": 18500,
+    "chapter_count": 20
+  },
+  "characters": {
+    "protagonist": {
+      "name": "林婉",
+      "role": "女主",
+      "arc": "重生/觉醒"
+    },
+    "antagonist": {
+      "name": "陆沉",
+      "role": "男主",
+      "arc": "渣男前夫"
+    },
+    "secondary": [
+      {
+        "name": "苏月",
+        "role": "白月光"
+      },
+      {
+        "name": "小蝶",
+        "role": "闺蜜"
+      },
+      {
+        "name": "顾南",
+        "role": "追求者"
+      }
+    ]
+  },
+  "quality_metrics": {
+    "plot_optimizer": {
+      "rhythm_score": 9.2,
+      "conflict_density": 8.8,
+      "hook_strength": 9.0
+    },
+    "tone_consistency": {
+      "overall_score": 9.5,
+      "consistency_level": "high"
+    },
+    "conflict_checker": {
+      "overall_score": 9.3,
+      "core_conflict_mapping": {
+        "early_stage": true,
+        "mid_stage": true,
+        "late_stage": true
+      }
+    },
+    "final_quality_score": 9.25
+  },
+  "generation_log": {
+    "step_1_topic_selector": {
+      "status": "completed",
+      "category": "女频-追妻火葬场",
+      "title": "ICU 门外，他抱白月光笑时，我重生了",
+      "timestamp": "2026-03-18T19:30:00Z"
+    },
+    "step_2_outline_designer": {
+      "status": "completed",
+      "chapters": 20,
+      "timeline": {
+        "early_oppression": "第1-5章",
+        "mid_reversal": "第6-15章",
+        "late_climax": "第16-20章"
+      },
+      "timestamp": "2026-03-18T19:34:00Z"
+    },
+    "step_3_editor_reviewer": {
+      "status": "passed",
+      "score": 9.2,
+      "timestamp": "2026-03-18T19:35:00Z"
+    },
+    "step_4_chapter_writer": {
+      "status": "completed",
+      "chapters_generated": 20,
+      "avg_word_count": 925,
+      "timestamp": "2026-03-18T20:15:00Z"
+    },
+    "step_5_plot_optimizer": {
+      "status": "completed",
+      "rhythm_score": 9.2,
+      "conflict_density": 8.8,
+      "hook_strength": 9.0,
+      "timestamp": "2026-03-18T20:20:00Z"
+    },
+    "step_6_tone_consistency": {
+      "status": "completed",
+      "overall_score": 9.5,
+      "consistency_level": "high",
+      "timestamp": "2026-03-18T20:25:00Z"
+    },
+    "step_7_conflict_checker": {
+      "status": "completed",
+      "overall_score": 9.3,
+      "core_conflict_mapping": {
+        "early_stage": true,
+        "mid_stage": true,
+        "late_stage": true
+      },
+      "timestamp": "2026-03-18T20:30:00Z"
+    },
+    "step_8_final_compiler": {
+      "status": "completed",
+      "timestamp": "2026-03-18T20:35:00Z"
+    }
+  },
+  "output_files": {
+    "novel_file": "outputs/ICU 门外，他抱白月光笑时，我重生了.md",
+    "outline_file": "outputs/ICU 门外，他抱白月光笑时，我重生了_outline.json",
+    "meta_file": "outputs/ICU 门外，他抱白月光笑时，我重生了_meta.json"
+  },
+  "summary": {
+    "total_generation_time": "约55分钟",
+    "final_verdict": "优秀，可直接发布",
+    "recommendation": "符合番茄小说平台所有标准，节奏紧凑，钩子强，核心冲突贯穿全文"
+  }
+}

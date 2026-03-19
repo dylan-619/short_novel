@@ -1,0 +1,228 @@
+{
+  "total_chapters": 20,
+  "total_words": 16500,
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "title": "赌债百万",
+      "summary": "洛笙的父亲因赌博欠下百万债务，高利贷上门逼债，威胁要抓洛笙抵债。绝望之际，神秘富豪傅寒提出闪婚还债",
+      "word_count_target": 850,
+      "conflict_stage": "前期压迫",
+      "key_plot_points": ["高利贷上门逼债", "洛父下跪求饶", "洛笙被迫承担债务", "傅寒出现提出交易"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "洛笙低头一看——那是一张结婚协议。"
+    },
+    {
+      "chapter_number": 2,
+      "title": "闪婚协议",
+      "summary": "洛笙犹豫后签署闪婚协议，傅寒当场帮她还清百万债务。高利贷离开，洛笙第一次真正面对这个神秘丈夫",
+      "word_count_target": 850,
+      "conflict_stage": "前期压迫",
+      "key_plot_points": ["签署结婚协议", "傅寒转账还债", "高利贷不甘离开", "洛笙感谢傅寒"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "傅寒停下脚步，没有回头：从今天起，你是我的妻子。"
+    },
+    {
+      "chapter_number": 3,
+      "title": "搬入豪宅",
+      "summary": "洛笙随傅寒搬入半山别墅，发现傅寒异常富有但冷漠。傅寒告诉她这是协议婚姻，互不干涉生活",
+      "word_count_target": 850,
+      "conflict_stage": "前期压迫",
+      "key_plot_points": ["搬入傅寒别墅", "发现豪宅规模", "傅寒冷淡态度", "约定互不干涉"],
+      "ending_hook_type": "反转",
+      "ending_hook": "深夜，洛笙发烧，傅寒却亲自送药喂她"
+    },
+    {
+      "chapter_number": 4,
+      "title": "温柔一面",
+      "summary": "洛笙生病期间，傅寒展现出意外温柔的一面，亲自照顾她。洛笙开始对这个陌生丈夫改观",
+      "word_count_target": 850,
+      "conflict_stage": "前期压迫",
+      "key_plot_points": ["洛笙高烧不退", "傅寒彻夜守候", "洛笙感动", "傅寒淡淡否认关心"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "洛笙发现傅寒的书房挂着一张她的照片"
+    },
+    {
+      "chapter_number": 5,
+      "title": "回归职场",
+      "summary": "洛笙康复后重返设计公司，同事因她突然嫁入豪门而议论纷纷。前同事兼追求者李浩出现挑衅",
+      "word_count_target": 850,
+      "conflict_stage": "前期压迫",
+      "key_plot_points": ["洛笙回公司上班", "同事八卦议论", "李浩出言嘲讽", "洛笙淡定应对"],
+      "ending_hook_type": "反转",
+      "ending_hook": "傅寒突然出现在公司，对李浩说：她是我的妻子"
+    },
+    {
+      "chapter_number": 6,
+      "title": "傅寒接人",
+      "summary": "傅寒亲自接洛笙下班，震惊全公司。李浩不甘心，想要调查傅寒的身份",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["傅寒亲自接洛笙", "全公司震惊", "李浩暗中调查", "傅寒带洛笙吃饭"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "高档餐厅，服务员都对傅寒毕恭毕敬"
+    },
+    {
+      "chapter_number": 7,
+      "title": "甜蜜晚餐",
+      "summary": "傅寒带洛笙吃米其林餐厅，对她温柔体贴。洛笙逐渐心动，开始怀疑傅寒是否也喜欢她",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["米其林餐厅用餐", "傅寒为洛笙剥虾", "洛笙心跳加速", "傅寒眼神温柔"],
+      "ending_hook_type": "反转",
+      "ending_hook": "洛笙醉酒，傅寒将她抱起，她恍惚间听他说：我等了好久"
+    },
+    {
+      "chapter_number": 8,
+      "title": "醉后表白",
+      "summary": "洛笙醉酒后向傅寒表白，傅寒没有拒绝。第二天洛笙尴尬，傅寒却若无其事",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["洛笙醉酒表白", "傅寒沉默倾听", "洛笙第二天害羞", "傅寒假装无事"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "洛笙发现傅寒手机屏保是她的照片"
+    },
+    {
+      "chapter_number": 9,
+      "title": "设计比赛",
+      "summary": "洛笙参加设计大赛，李浩暗中使坏抄袭她的作品。傅寒发现后暗中帮助",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["洛笙参赛", "李浩抄袭作品", "评委怀疑洛笙", "傅寒暗中调查"],
+      "ending_hook_type": "反转",
+      "ending_hook": "傅寒拿出证据，李浩当场被揭穿"
+    },
+    {
+      "chapter_number": 10,
+      "title": "李浩曝光",
+      "summary": "李浩抄袭丑闻曝光，被公司开除。洛笙获得比赛冠军，名声大噪",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["李浩被开除", "公司高层道歉", "洛笙获得冠军", "傅寒暗中庆祝"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "洛笙发现傅寒是某集团的神秘老板"
+    },
+    {
+      "chapter_number": 11,
+      "title": "傅寒身份",
+      "summary": "洛笙调查傅寒，发现他是千亿集团继承人。她震惊于丈夫的财富",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["洛笙调查傅寒", "发现傅氏集团", "洛笙震惊", "傅寒坦然承认"],
+      "ending_hook_type": "反转",
+      "ending_hook": "傅寒：我早说过的，你是我的妻子"
+    },
+    {
+      "chapter_number": 12,
+      "title": "洛父作妖",
+      "summary": "洛笙父亲再次赌博，欠下巨额债务，试图向洛笙要钱。洛笙拒绝，洛父闹到傅氏公司",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["洛父再次赌博", "洛笙拒绝要钱", "洛父闹事", "公司保安阻拦"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "傅寒出现，洛父吓得腿软"
+    },
+    {
+      "chapter_number": 13,
+      "title": "傅寒出手",
+      "summary": "傅寒替洛笙还清父亲债务，但要求洛父戒赌并断绝关系。洛父发誓改过",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["傅寒替洛父还债", "要求洛父戒赌", "洛父感恩戴德", "洛笙心疼傅寒"],
+      "ending_hook_type": "反转",
+      "ending_hook": "洛笙发现傅寒其实早就认识她父亲"
+    },
+    {
+      "chapter_number": 14,
+      "title": "往日秘密",
+      "summary": "傅寒告诉洛笙，三年前他见过洛笙，被她坚韧打动，一直在默默关注她",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["傅寒讲述往事", "三年前的邂逅", "傅寒默默关注", "洛笙感动落泪"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "原来，闪婚不是交易，而是他蓄谋已久"
+    },
+    {
+      "chapter_number": 15,
+      "title": "真心相待",
+      "summary": "洛笙和傅寒真心相爱，决定重新举办婚礼。两人挑选婚纱，甜蜜幸福",
+      "word_count_target": 900,
+      "conflict_stage": "中期反转",
+      "key_plot_points": ["决定重新办婚礼", "挑选婚纱", "甜蜜相处", "双方父母见面"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "洛笙的亲戚嫉妒，暗中策划破坏"
+    },
+    {
+      "chapter_number": 16,
+      "title": "亲戚作妖",
+      "summary": "洛笙的贪婪亲戚试图破坏婚礼，散布洛笙是拜金女的谣言。傅寒直接澄清",
+      "word_count_target": 950,
+      "conflict_stage": "后期爽点",
+      "key_plot_points": ["亲戚散布谣言", "媒体报道", "傅寒召开记者会", "公开洛笙设计才华"],
+      "ending_hook_type": "反转",
+      "ending_hook": "傅寒当场宣布赠送洛笙工作室"
+    },
+    {
+      "chapter_number": 17,
+      "title": "工作室成立",
+      "summary": "傅寒帮洛笙成立设计工作室，洛笙的事业蒸蒸日上。亲戚们眼红嫉妒，再次作妖",
+      "word_count_target": 950,
+      "conflict_stage": "后期爽点",
+      "key_plot_points": ["工作室成立", "洛笙设计才华被认可", "客户蜂拥而至", "亲戚嫉妒"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "亲戚绑架洛笙，威胁傅寒"
+    },
+    {
+      "chapter_number": 18,
+      "title": "生死营救",
+      "summary": "傅寒带人救出洛笙，亲戚被绳之以法。洛笙受轻伤，傅寒心疼不已",
+      "word_count_target": 950,
+      "conflict_stage": "后期爽点",
+      "key_plot_points": ["傅寒定位洛笙", "冒险营救", "亲戚被抓", "洛笙受伤"],
+      "ending_hook_type": "反转",
+      "ending_hook": "傅寒当众宣誓：从今以后，谁敢动她"
+    },
+    {
+      "chapter_number": 19,
+      "title": "完美婚礼",
+      "summary": "洛笙康复后，傅寒为她筹备梦幻婚礼。亲朋好友见证，两人交换戒指",
+      "word_count_target": 950,
+      "conflict_stage": "后期爽点",
+      "key_plot_points": ["婚礼筹备", "豪华场地", "亲友见证", "交换戒指"],
+      "ending_hook_type": "悬念",
+      "ending_hook": "傅寒宣誓时，洛笙发现他眼中泪光"
+    },
+    {
+      "chapter_number": 20,
+      "title": "幸福结局",
+      "summary": "洛笙事业爱情双收，成为知名设计师。傅寒宠妻如命，两人过上幸福生活",
+      "word_count_target": 1000,
+      "conflict_stage": "后期爽点",
+      "key_plot_points": ["洛笙事业成功", "傅寒宠妻日常", "两人幸福生活", "展望未来"],
+      "ending_hook_type": "无",
+      "ending_hook": "三年后，洛笙举办个人画展，傅寒在台下微笑"
+    }
+  ],
+  "character_arc": {
+    "洛笙": {
+      "start": "绝望/被迫还债",
+      "middle": "惊讶/心动/逐渐爱上傅寒",
+      "end": "幸福/事业爱情双收"
+    },
+    "傅寒": {
+      "start": "神秘/冷漠/蓄谋已久",
+      "middle": "温柔/宠妻/展露真心",
+      "end": "真情/守护/幸福美满"
+    },
+    "洛父": {
+      "start": "欠债/赌博成瘾",
+      "middle": "改过自新/感恩傅寒",
+      "end": "戒赌成功/安分生活"
+    }
+  },
+  "timeline": {
+    "early_oppression": "第1-5章：债务危机+闪婚+初识",
+    "mid_reversal": "第6-15章：感情升温+事业起步+真相大白",
+    "late_climax": "第16-20章：面对阻碍+完美婚礼+幸福结局"
+  }
+}
