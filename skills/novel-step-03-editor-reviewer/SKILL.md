@@ -20,6 +20,9 @@ description: 编辑审核 - 大纲逻辑性审核，章节质量质检
     "chapters": [...],
     "character_arc": {...}
   },
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026-03-20T10:30:00Z",
+  "work_dir": "../outputs/[书名]/",
   "reference_path": "../docs/参考资料.md"
 }
 ```
@@ -37,6 +40,9 @@ description: 编辑审核 - 大纲逻辑性审核，章节质量质检
     "ending_hook_type": "悬念"
   },
   "target_words": 800,
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026-03-20T10:30:00Z",
+  "work_dir": "../outputs/[书名]/",
   "reference_path": "../docs/参考资料.md"
 }
 ```

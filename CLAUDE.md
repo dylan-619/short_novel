@@ -11,7 +11,8 @@ This is a novel generation system using Claude Code + GLM4.7 with a multi-Skill 
 ```
 short_novel/
 ├── docs/
-│   └── 参考资料.md          # 番茄小说爆款模板库（必读）
+│   ├── 参考资料.md          # 番茄小说爆款模板库（必读）
+│   └── 技能架构优化说明.md    # 最新架构优化说明
 ├── skills/                  # 12 个协作 Skills
 │   ├── novelist-author.md    # 作家：章节写作
 │   ├── editor-reviewer.md   # 编辑：大纲/章节审核
@@ -26,8 +27,18 @@ short_novel/
 │   ├── conflict-checker.md   # 冲突检查：核心冲突贯穿
 │   └── final-compiler.md    # 最终汇编：生成完整小说
 ├── outputs/
-│   ├── [书名].md            # 最终小说全文
-│   └── [书名]_meta.json    # 元数据和质量报告
+│   ├── novel-used-characters.json  # 全局角色跟踪文件
+│   └── [书名]/                 # 每本小说的专属文件夹
+│       ├── [书名].md           # 最终小说全文
+│       ├── [书名]_meta.json   # 元数据和质量报告
+│       ├── chapters/            # 章节分文件
+│       │   ├── [书名]_chapter_01.md
+│       │   ├── [书名]_chapter_02.md
+│       │   └── ...
+│       └── work/               # 工作数据
+│           ├── outline.json      # 大纲数据
+│           ├── characters.json   # 角色设定
+│           └── generation_log.json # 生成日志
 ├── 项目需求.md              # 完整项目需求文档
 └── CLAUDE.md                # 本文档
 ```

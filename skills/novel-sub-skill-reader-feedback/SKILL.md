@@ -19,7 +19,8 @@ description: 读者反馈 - 模拟番茄平台读者视角评价
   "chapter_number": 1,
   "chapter_content": "章节内容...",
   "target_audience": "female",
-  "target_tone": "虐恋爽感"
+  "target_tone": "虐恋爽感",
+  "work_dir": "../outputs/[书名]/"
 }
 ```
 

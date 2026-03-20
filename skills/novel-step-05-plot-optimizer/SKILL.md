@@ -31,6 +31,9 @@ description: 情节优化师 - 优化剧情节奏，强化冲突密度
       "第7-8章爽点不够密集"
     ]
   },
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026-03-20T10:30:00Z",
+  "work_dir": "../outputs/[书名]/",
   "reference_path": "../docs/参考资料.md"
 }
 ```

@@ -28,6 +28,9 @@ description: 冲突检查 - 确保核心冲突贯穿全文
     "mid_stage": "中期：心死女主 vs 幡然醒悟疯狂追妻的前夫",
     "late_stage": "后期：女主复仇搞事业 vs 渣男阻挠 + 后悔"
   },
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026-03-20T10:30:00Z",
+  "work_dir": "../outputs/[书名]/",
   "reference_path": "../docs/参考资料.md"
 }
 ```

@@ -16,9 +16,75 @@ description: 大纲师 - 设计 20 章完整大纲，分配核心冲突三要素
   "category": "女频-追妻火葬场",
   "novel_title": "ICU 门外，他抱白月光笑时，我重生了",
   "estimated_words": 18000,
-  "core_climax_points": [...],
-  "relationships": {...},
-  "tone": "虐恋爽感"
+  "core_climax_points": [
+    "前期：深情女主 vs 冷漠渣男 + 白月光陷害",
+    "中期：心死女主 vs 幡然醒悟疯狂追妻的前夫",
+    "后期：女主复仇搞事业 vs 渣男阻挠 + 后悔"
+  ],
+  "characters": {
+    "protagonist": {
+      "name": "江念",
+      "gender": "女",
+      "role": "女主（重生/觉醒）",
+      "alignment": "protagonist",
+      "personality": {
+        "start": "深情付出",
+        "middle": "心死觉醒",
+        "end": "独立女王"
+      }
+    },
+    "antagonist_main": {
+      "name": "顾辞",
+      "gender": "男",
+      "role": "渣男前夫",
+      "alignment": "antagonist",
+      "personality": {
+        "start": "冷漠轻视",
+        "middle": "幡然醒悟",
+        "end": "后悔追妻"
+      }
+    },
+    "antagonist_secondary": {
+      "name": "沈离",
+      "gender": "女",
+      "role": "白月光/心机女",
+      "alignment": "antagonist",
+      "relationship_to_protagonist": "情敌",
+      "personality": {
+        "start": "表面柔弱",
+        "middle": "心机深沉",
+        "end": "被打脸"
+      }
+    },
+    "secondary_characters": [
+      {
+        "name": "江父",
+        "gender": "男",
+        "role": "女主父亲",
+        "alignment": "neutral",
+        "relationship_to_protagonist": "父女"
+      },
+      {
+        "name": "江母",
+        "gender": "女",
+        "role": "女主母亲",
+        "alignment": "neutral",
+        "relationship_to_protagonist": "母女"
+      },
+      {
+        "name": "林悦",
+        "gender": "女",
+        "role": "闺蜜",
+        "alignment": "ally",
+        "relationship_to_protagonist": "好友"
+      }
+    ]
+  },
+  "tone": "虐恋爽感",
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026-03-20T10:30:00Z",
+  "work_dir": "../outputs/[书名]/",
+  "reference_path": "../docs/参考资料.md"
 }
 ```
 
@@ -57,22 +123,91 @@ description: 大纲师 - 设计 20 章完整大纲，分配核心冲突三要素
     ...
   ],
   "character_arc": {
-    "林婉": {
-      "start": "深情女主",
+    "江念": {
+      "start": "深情付出",
       "middle": "心死觉醒",
       "end": "独立女王"
     },
-    "陆沉": {
-      "start": "冷漠渣男",
+    "顾辞": {
+      "start": "冷漠轻视",
       "middle": "幡然醒悟",
       "end": "后悔追妻"
+    },
+    "沈离": {
+      "start": "表面柔弱",
+      "middle": "心机深沉",
+      "end": "被打脸"
     }
+  },
+  "characters": {
+    "protagonist": {
+      "name": "江念",
+      "gender": "女",
+      "role": "女主（重生/觉醒）",
+      "alignment": "protagonist",
+      "personality": {
+        "start": "深情付出",
+        "middle": "心死觉醒",
+        "end": "独立女王"
+      }
+    },
+    "antagonist_main": {
+      "name": "顾辞",
+      "gender": "男",
+      "role": "渣男前夫",
+      "alignment": "antagonist",
+      "personality": {
+        "start": "冷漠轻视",
+        "middle": "幡然醒悟",
+        "end": "后悔追妻"
+      }
+    },
+    "antagonist_secondary": {
+      "name": "沈离",
+      "gender": "女",
+      "role": "白月光/心机女",
+      "alignment": "antagonist",
+      "relationship_to_protagonist": "情敌",
+      "personality": {
+        "start": "表面柔弱",
+        "middle": "心机深沉",
+        "end": "被打脸"
+      }
+    },
+    "secondary_characters": [
+      {
+        "name": "江父",
+        "gender": "男",
+        "role": "女主父亲",
+        "alignment": "neutral",
+        "relationship_to_protagonist": "父女"
+      },
+      {
+        "name": "江母",
+        "gender": "女",
+        "role": "女主母亲",
+        "alignment": "neutral",
+        "relationship_to_protagonist": "母女"
+      },
+      {
+        "name": "林悦",
+        "gender": "女",
+        "role": "闺蜜",
+        "alignment": "ally",
+        "relationship_to_protagonist": "好友"
+      }
+    ]
   },
   "timeline": {
     "early_oppression": "第1-5章",
     "mid_reversal": "第6-15章",
     "late_climax": "第16-20章"
-  }
+  },
+  "content_type": "outline",
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026x03-20T10:30:00Z",
+  "work_dir": "../outputs/[书名]/",
+  "reference_path": "../docs/参考资料.md"
 }
 ```
 

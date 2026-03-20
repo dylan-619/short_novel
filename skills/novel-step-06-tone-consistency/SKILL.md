@@ -24,6 +24,9 @@ description: 基调维持 - 确保全文风格统一
     ]
   },
   "target_tone": "虐恋爽感",
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026-03-20T10:30:00Z",
+  "work_dir": "../outputs/[书名]/",
   "reference_path": "../docs/参考资料.md"
 }
 ```

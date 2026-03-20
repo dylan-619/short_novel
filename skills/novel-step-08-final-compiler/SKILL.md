@@ -7,7 +7,7 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 
 ## 职责
 
-汇总所有章节，生成完整小说文件和元数据，输出到 `../outputs/` 目录。
+汇总所有章节，生成完整小说文件和元数据，输出到小说专属文件夹中。
 
 ## 输入格式
 
@@ -31,14 +31,18 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
   "meta": {
     "novel_title": "ICU 门外，他抱白月光笑时，我重生了",
     "category": "女频-追妻火葬场",
-    "target_words": 18000,
+    "estimated_words": 18000,
     "target_chapters": 20
   },
   "quality_reports": {
     "plot_optimizer": {...},
     "tone_consistency": {...},
     "conflict_checker": {...}
-  }
+  },
+  "session_id": "uuid-v4",
+  "creation_timestamp": "2026-03-20T10:30:00Z",
+  "work_dir": "../outputs/ICU 门外，他抱白月光笑时，我重生了/",
+  "reference_path": "../docs/参考资料.md"
 }
 ```
 
@@ -46,7 +50,7 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 
 ### 1. 小说全文文件
 
-输出到 `../outputs/[书名].md`
+输出到 `../outputs/[书名]/[书名].md`
 
 ```markdown
 # ICU 门外，他抱白月光笑时，我重生了
@@ -81,7 +85,17 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 
 ### 2. 元数据文件
 
-输出到 `../outputs/[书名]_meta.json`
+输出到 `../outputs/[书名]/[书名]_meta.json`
+
+### 3. 章节分文件
+
+输出到 `../outputs/[书名]/chapters/[书名]_chapter_[章号].md`
+
+### 4. 工作数据文件
+
+输出到 `../outputs/[书名]/work/outline.json` (大纲数据)
+输出到 `../outputs/[书名]/work/characters.json` (角色设定)
+输出到 `../outputs/[书名]/work/generation_log.json` (生成日志)
 
 ```json
 {
@@ -129,8 +143,10 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
     "final_quality_score": 9.33
   },
   "output_files": {
-    "novel_file": "../outputs/ICU 门外，他抱白月光笑时，我重生了.md",
-    "meta_file": "../outputs/ICU 门外，他抱白月光笑时，我重生了_meta.json"
+    "novel_file": "../outputs/ICU 门外，他抱白月光笑时，我重生了/ICU 门外，他抱白月光笑时，我重生了.md",
+    "meta_file": "../outputs/ICU 门外，他抱白月光笑时，我重生了/ICU 门外，他抱白月光笑时，我重生了_meta.json",
+    "chapter_dir": "../outputs/ICU 门外，他抱白月光笑时，我重生了/chapters/",
+    "work_dir": "../outputs/ICU 门外，他抱白月光笑时，我重生了/work/"
   }
 }
 ```
@@ -189,8 +205,17 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 
 ```
 ../outputs/
-├── ICU 门外，他抱白月光笑时，我重生了.md
-└── ICU 门外，他抱白月光笑时，我重生了_meta.json
+└── ICU 门外，他抱白月光笑时，我重生了/
+    ├── ICU 门外，他抱白月光笑时，我重生了.md  # 完整小说
+    ├── ICU 门外，他抱白月光笑时，我重生了_meta.json  # 元数据
+    ├── chapters/  # 章节分文件
+    │   ├── ICU 门外，他抱白月光笑时，我重生了_chapter_01.md
+    │   ├── ICU 门外，他抱白月光笑时，我重生了_chapter_02.md
+    │   └── ...
+    └── work/  # 工作数据
+        ├── outline.json
+        ├── characters.json
+        └── generation_log.json
 ```
 
 ### 输出检查清单
