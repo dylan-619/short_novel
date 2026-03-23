@@ -4,7 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a novel generation system using Claude Code + GLM4.7 with a multi-Skill collaboration architecture. The system automatically generates 20,000-character short stories that meet Tomato Platform (番茄小说) high-engagement standards.
+This is a novel generation system using Claude Code + GLM4.7 with a multi-Skill collaboration architecture. The system automatically generates stories with flexible chapter count and word count configurations, meeting various platform standards:
+- **Tomato Platform (番茄小说)**: 20 chapters, 800-1000 chars/chapter
+- **Short Video Scripts**: 5-10 chapters, 200-300 chars/chapter
+- **Medium Novels**: 30-50 chapters, 1000-1500 chars/chapter
+- **Long Novels**: 100+ chapters, 1500-3000 chars/chapter
 
 ## Project Structure
 
@@ -64,12 +68,19 @@ short_novel/
 
 ### Core Requirements
 
-**Story Specifications**:
-- Total length: 12,000-18,000 characters (20 chapters)
-- Chapter length: 800-1,000 characters each
+**Story Specifications** (Flexible Configuration):
+- Total length: Configurable (default 12,000-18,000 for 20 chapters)
+- Chapter count: Configurable (default 20 chapters)
+- Chapter length: Configurable (default 800-1,000 characters)
 - Opening: Conflict within 300 characters
 - Chapter endings: Strong hooks (suspense/reversal/crisis)
 - Ending: Logical closure, maximum satisfaction
+
+**Configuration Examples**:
+1. **Short Video Script**: 5-10 chapters, 200-300 chars/chapter
+2. **Short Story**: 20 chapters, 800-1000 chars/chapter
+3. **Medium Novel**: 30-50 chapters, 1000-1500 chars/chapter
+4. **Long Novel**: 100+ chapters, 1500-3000 chars/chapter
 
 **Quality Standards**:
 - Core conflict 3 elements: Early oppression → Mid reversal → Late climax
@@ -92,18 +103,19 @@ short_novel/
 ## Skills Execution Flow
 
 ```
-用户启动 → topic-selector
-         → outline-designer
+用户启动（含配置：章节数、字数范围）
+         → topic-selector（应用配置参数）
+         → outline-designer（根据章节数分配阶段）
          → editor-reviewer
-         → [chapter-writer × 20]
+         → [chapter-writer × 章节数配置]
               ├→ novelist-author
               ├→ hook-crafter
-              ├→ word-count-controller
+              ├→ word-count-controller（应用字数范围）
               ├→ editor-reviewer
               └→ reader-feedback
          → plot-optimizer
          → [tone-consistency + conflict-checker] 并行
-         → final-compiler
+         → final-compiler（汇编可变章节数）
          → 输出完整小说
 ```
 

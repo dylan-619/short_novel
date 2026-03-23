@@ -1,13 +1,13 @@
 ---
 name: novel-step-08-final-compiler
-description: 最终汇编 - 汇总所有章节，生成完整小说文件
+description: 最终汇编 - 汇总所有章节，生成完整小说文件，支持可变章节数
 ---
 
 # 最终汇编
 
 ## 职责
 
-汇总所有章节，生成完整小说文件和元数据，输出到小说专属文件夹中。
+汇总所有章节，生成完整小说文件和元数据，输出到小说专属文件夹中。支持灵活的章节数和字数配置。
 
 ## 输入格式
 
@@ -24,6 +24,8 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
   ],
   "outline": {
     "total_chapters": 20,
+    "chapter_word_min": 800,
+    "chapter_word_max": 1000,
     "chapters": [...],
     "character_arc": {...},
     "timeline": {...}
@@ -45,6 +47,18 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
   "reference_path": "../docs/参考资料.md"
 }
 ```
+
+### 输入参数说明
+
+| 参数 | 类型 | 忌填 | 说明 |
+|------|------|--------|------|
+| all_chapters | array | 否 | 所有章节内容 |
+| outline.total_chapters | number | 否 | 总章节数 |
+| outline.chapter_word_min | number | 否 | 每章最少字数 |
+| outline.chapter_word_max | number | 否 | 每章最多字数 |
+| meta.novel_title | string | 否 | 小说标题 |
+| meta.estimated_words | number | 否 | 预估总字数 |
+| quality_reports | object | 否 | 质量报告 |
 
 ## 输出格式
 
@@ -160,8 +174,8 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 
 ## 基本信息
 - 题材
-- 字数
-- 章节
+- 字数（根据配置）
+- 章节（根据配置）
 - 基调
 
 ## 人物表
@@ -172,7 +186,7 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 ## 第X章 章节标题
 （章节内容）
 
-...（继续所有章节）
+...（继续所有章节，根据 total_chapters）
 ```
 
 ### 2. 汇总元数据
@@ -199,6 +213,13 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 - 7.0-7.9：一般，建议优化后发布
 - <7.0：较差，建议重新生成
 
+### 4. 字数和章节数统计
+
+根据实际输出统计：
+- 实际总字数：sum(chapters.word_count)
+- 实际章节数：all_chapters.length
+- 平均每章字数：actual_words / actual_chapters
+
 ## 文件输出
 
 ### 输出目录
@@ -222,11 +243,13 @@ description: 最终汇编 - 汇总所有章节，生成完整小说文件
 
 | 检查项 | 要求 |
 |--------|------|
-| 小说文件 | 包含完整 20 章内容 |
+| 小说文件 | 包含完整所有章节内容（根据配置的章节数） |
 | 元数据文件 | 包含所有质量指标 |
 | 文件编码 | UTF-8 |
 | 文件格式 | Markdown / JSON |
 | 输出路径 | 正确的 outputs/ 目录 |
+| 字数统计 | 与配置的范围一致 |
+| 章节数统计 | 与配置的章节数一致 |
 
 ## 验证方法
 
@@ -260,3 +283,5 @@ cat ../outputs/[书名]_meta.json | jq .
 3. 章节分隔清晰
 4. 元数据完整准确
 5. 确保输出到正确的目录
+6. 支持可变章节数（不再固定为20章）
+7. 根据配置的字数范围进行统计和验证
