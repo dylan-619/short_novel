@@ -22,9 +22,16 @@ description: 钩子师 - 设计章节结尾钩子
     "summary": "林婉重生后决定取消婚礼，开始暗中收集证据"
   },
   "target_tone": "虐恋爽感",
-  "work_dir": "../outputs/[书名]/"
+  "work_dir": "./outputs/[书名]/work/"
 }
 ```
+
+**【关键】输出路径规则（所有技能必须统一）**：
+- 工作目录：`./outputs/[书名]/work/`
+- 参考资料：`./docs/参考资料.md`
+- 输出目录：`./outputs/`
+- 小说目录：`./outputs/[书名]/`
+- 临时文件必须输出到 `work_dir`，禁止输出到 `outputs/` 根目录
 
 ## 输出格式
 

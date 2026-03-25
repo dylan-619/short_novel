@@ -33,9 +33,17 @@ description: 情节优化师 - 优化剧情节奏，强化冲突密度
   },
   "session_id": "uuid-v4",
   "creation_timestamp": "2026-03-20T10:30:00Z",
-  "work_dir": "../outputs/[书名]/",
-  "reference_path": "../docs/参考资料.md"
+  "work_dir": "./outputs/[书名]/work/",
+  "reference_path": "./docs/参考资料.md"
 }
+```
+
+**【关键】输出路径规则（所有技能必须统一）**：
+- 工作目录：`./outputs/[书名]/work/`
+- 参考资料：`./docs/参考资料.md`
+- 输出目录：`./outputs/`
+- 小说目录：`./outputs/[书名]/`
+- 临时文件必须输出到 `work_dir`，禁止输出到 `outputs/` 根目录
 ```
 
 ## 输出格式

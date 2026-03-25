@@ -20,9 +20,16 @@ description: 读者反馈 - 模拟番茄平台读者视角评价
   "chapter_content": "章节内容...",
   "target_audience": "female",
   "target_tone": "虐恋爽感",
-  "work_dir": "../outputs/[书名]/"
+  "work_dir": "./outputs/[书名]/work/"
 }
 ```
+
+**【关键】输出路径规则（所有技能必须统一）**：
+- 工作目录：`./outputs/[书名]/work/`
+- 参考资料：`./docs/参考资料.md`
+- 输出目录：`./outputs/`
+- 小说目录：`./outputs/[书名]/`
+- 临时文件必须输出到 `work_dir`，禁止输出到 `outputs/` 根目录
 
 ### 全文反馈
 
