@@ -204,6 +204,77 @@ description: 冲突检查 - 确保核心冲突贯穿全文
 }
 ```
 
+## 人物逻辑一致性检查
+
+ ### 检查说明
+
+ 由于 `character-consistency-checker` 已在章节写作过程中进行详细的人物一致性检查，
+ 此处仅进行**核心冲突相关的人物逻辑验证**：
+
+ ### 检查内容
+
+ 1. **人物弧光完整性**：
+    - 检查主角弧光是否完整呈现（start → middle → end）
+    - 检查人物转变是否有充分的情节支撑
+    - 验证转折点是否清晰合理
+
+ 2. **人物行为与冲突匹配**：
+    - 检查人物行为是否推动核心冲突发展
+    - 验证人物行为是否符合冲突阶段特点
+    - 确保人物行为不削弱冲突张力
+
+ 3. **关系变化与冲突关联**：
+    - 检查人物关系变化是否与冲突发展同步
+    - 验证关系转折是否有冲突事件触发
+    - 确保关系变化增强而非削弱冲突
+
+ 4. **情感轨迹与冲突呼应**：
+    - 检查情感变化是否呼应冲突发展
+    - 验证情感高潮是否与冲突高潮对应
+    - 确保情感变化增强冲突感染力
+
+ ### 检查方法
+
+ ```json
+ {
+   "chapter_analysis": {
+     "chapter": 5,
+     "character_logic_check": {
+       "arc_progression": {
+         "江念": {
+           "expected_stage": "start → middle",
+           "actual_stage": "start",
+           "status": "on_track",
+           "note": "第5章仍处于start阶段，第6章应进入middle"
+         }
+       },
+       "conflict_contribution": {
+         "江念": {
+           "behaviors_analyzed": 5,
+           "conflict_advancing": 4,
+           "conflict_weakening": 1,
+           "score": 8.5
+         }
+       }
+     }
+   }
+ }
+ ```
+
+ ### 与 character-consistency-checker 的协作
+
+ - **character-consistency-checker**：章节级检查，确保单章内人物行为一致
+ - **conflict-checker**：全文级检查，确保人物发展符合核心冲突轨迹
+
+ ### 检查标准
+
+ | 检查项 | 要求 |
+ |--------|------|
+ | 人物弧光完整 | start/middle/end 三阶段完整呈现 |
+ | 行为推动冲突 | 人物行为应推进而非削弱冲突 |
+ | 关系变化合理 | 关系变化应有冲突事件触发 |
+ | 情感呼应冲突 | 情感变化应增强冲突感染力 |
+
 ## 冲突轨迹
 
 ### 轨迹分析

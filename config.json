@@ -1,7 +1,7 @@
 {
   "config": {
-    "target_chapters": 22,
-    "chapter_word_min": 600,
-    "chapter_word_max": 800
+    "target_chapters": 15,
+    "chapter_word_min": 500,
+    "chapter_word_max": 700
   }
 }

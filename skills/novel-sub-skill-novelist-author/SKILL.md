@@ -68,6 +68,56 @@ description: 作家 - 具体章节内容写作，人物对话和心理描写
     },
     "secondary_characters": [...]
   },
+  "character_state_tracker": {  // 【增强】人物状态追踪器
+    "江念": {
+      "met_people": ["顾辞", "沈离"],  // 已经在之前章节见过的人
+      "relationships": {
+        "顾辞": {
+          "current_state": "仇视",
+          "intensity": 8,
+          "history": [
+            {"chapter": 1, "from": "深爱", "to": "心死", "trigger": "目睹出轨"}
+          ]
+        },
+        "沈离": {
+          "current_state": "敌对",
+          "intensity": 7,
+          "history": [
+            {"chapter": 1, "from": "陌生", "to": "敌对", "trigger": "确认情敌"}
+          ]
+        }
+      },
+      "emotional_trajectory": {
+        "chapter_1": "期待 → 震惊 → 痛苦 → 心死 → 觉醒"
+      },
+      "character_arc_stage": "middle",  // start/middle/end
+      "key_events_impact": [
+        {"event": "目睹丈夫抱白月光", "impact": "对顾辞完全死心"}
+      ]
+    },
+    "顾辞": {
+      "met_people": ["江念"],
+      "relationships": {
+        "江念": {
+          "current_state": "冷漠",
+          "intensity": 3,
+          "history": []
+        }
+      },
+      "emotional_trajectory": {
+        "chapter_1": "冷漠 → 不耐烦"
+      },
+      "character_arc_stage": "start",
+      "key_events_impact": []
+    }
+  },
+  "character_arc_mapping": {  // 【新增】人物弧光映射
+    "江念": {
+      "start": {"chapters": [1, 2, 3, 4, 5], "state": "深情付出"},
+      "middle": {"chapters": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "state": "心死觉醒"},
+      "end": {"chapters": [16, 17, 18, 19, 20], "state": "独立女王"}
+    }
+  },
   "previous_content": "前文内容...",
   "target_tone": "虐恋爽感",
   "session_id": "uuid-v4",
@@ -75,6 +125,32 @@ description: 作家 - 具体章节内容写作，人物对话和心理描写
   "work_dir": "../outputs/[书名]/"
 }
 ```
+
+**【重要】人物状态检查规则**：
+
+ ### 1. 人物出现检查
+ - 写作前必须检查 `character_state_tracker`
+ - 如果某人物已在 `met_people` 列表中，写本章时**不能**使用"第一次见面"、"初次相见"、"从未谋面"等描述
+ - 如果需要描写人物再次见面，应使用"再次相见"、"又见面了"、"熟悉的..."等描述
+
+ ### 2. 人物关系检查
+ - 检查 `relationships` 中的 `current_state` 和 `intensity`
+ - 人物互动必须符合当前关系状态（仇视、敌对、冷漠、友好等）
+ - 对话语气必须符合关系强度（intensity 1-10）
+
+ ### 3. 人物弧光检查
+ - 检查 `character_arc_stage` 确定当前处于哪个阶段（start/middle/end）
+ - 参考 `character_arc_mapping` 确认当前阶段的行为规范
+ - 确保人物行为符合弧光轨迹，不出现禁忌行为
+
+ ### 4. 情感连贯检查
+ - 参考 `emotional_trajectory` 了解前几章的情感状态
+ - 本章情感必须与前章连贯，不能突然跳变
+ - 情感变化必须有触发事件
+
+ ### 5. 事件影响检查
+ - 参考 `key_events_impact` 了解重要事件对人物的影响
+ - 人物行为必须体现这些影响，不能遗忘
 
 ## 输出格式
 
@@ -89,7 +165,76 @@ description: 作家 - 具体章节内容写作，人物对话和心理描写
     "顾辞抱白月光出现",
     "江念心死跳楼",
     "重生回到三年前"
-  ]
+  ],
+  "character_state_update": {  // 【增强】本章的人物状态更新
+    "江念": {
+      "met_people": ["护士"],  // 本章新认识的人（追加）
+      "relationships": {
+        "顾辞": {
+          "history_addition": {
+            "chapter": 1,
+            "from": "深爱",
+            "to": "心死",
+            "trigger": "目睹出轨"
+          },
+          "intensity_change": "8 → 9"  // 如果强度变化
+        },
+        "沈离": {
+          "current_state": "敌对",
+          "intensity": 7,
+          "history": []
+        },
+        "护士": {  // 新认识的人
+          "current_state": "陌生",
+          "intensity": 1,
+          "history": []
+        }
+      },
+      "emotional_trajectory_addition": {
+        "chapter_1": "期待 → 震惊 → 痛苦 → 心死 → 觉醒"
+      },
+      "character_arc_stage": "middle",  // 如果阶段发生变化
+      "key_events_impact_addition": [
+        {
+          "event": "目睹丈夫抱白月光",
+          "impact": "对顾辞完全死心",
+          "impact_level": "high"  // high/medium/low
+        },
+        {
+          "event": "提出离婚被冷漠对待",
+          "impact": "彻底绝望，决定重生",
+          "impact_level": "high"
+        }
+      ]
+    },
+    "顾辞": {
+      "relationships": {
+        "江念": {
+          "history_addition": {
+            "chapter": 1,
+            "from": "冷漠",
+            "to": "冷漠",
+            "trigger": "被提出离婚"
+          }
+        }
+      },
+      "emotional_trajectory_addition": {
+        "chapter_1": "冷漠 → 不耐烦"
+      }
+    },
+    "沈离": {
+      "relationships": {
+        "江念": {
+          "current_state": "敌对",
+          "intensity": 7,
+          "history": []
+        }
+      },
+      "emotional_trajectory_addition": {
+        "chapter_1": "嫉妒 → 满意"
+      }
+    }
+  }
 }
 ```
 
@@ -185,7 +330,7 @@ ICU 门外，消毒水的味道刺鼻。
 
 ## 钩子设计
 
-**钩子位置**：章末 50-100100 字
+**钩子位置**：章末 50-100 字
 
 **钩子类型**：
 1. **悬念**：`她重生了。就在她死亡前的那一天。`
