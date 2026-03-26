@@ -90,7 +90,7 @@ description: 作家 - 具体章节内容写作，人物对话和心理描写
       "emotional_trajectory": {
         "chapter_1": "期待 → 震惊 → 痛苦 → 心死 → 觉醒"
       },
-      "character_arc_stage": "middle",  // start/middle/end
+      "character_arc_stage": "start",  // start/middle/end（第1-5章为start阶段）
       "key_events_impact": [
         {"event": "目睹丈夫抱白月光", "impact": "对顾辞完全死心"}
       ]
@@ -200,7 +200,7 @@ description: 作家 - 具体章节内容写作，人物对话和心理描写
       "emotional_trajectory_addition": {
         "chapter_1": "期待 → 震惊 → 痛苦 → 心死 → 觉醒"
       },
-      "character_arc_stage": "middle",  // 如果阶段发生变化
+      "character_arc_stage": "start",  // 第1-5章为start阶段，第6章后才变为middle
       "key_events_impact_addition": [
         {
           "event": "目睹丈夫抱白月光",
