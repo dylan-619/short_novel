@@ -5,6 +5,14 @@ description: 作家 - 具体章节内容写作，人物对话和心理描写
 
 # 作家
 
+## 【执行模式】单章节处理
+
+**【关键】本技能必须**：
+- 每次只处理一个章节
+- 等待本章写作完成后才返回结果
+- 不得批量生成多个章节
+- 不得启动后台任务
+
 ## 职责
 
 具体章节内容写作，人物对话和心理描写，创作符合人物设定的章节初稿。
@@ -345,6 +353,147 @@ ICU 门外，消毒水的味道刺鼻。
 3. **危机**：`手术室外，医生缓缓摇头。`
 4. **打脸**：`顾辞跪在雨中：江念，求你回来。`
 
+## 【关键】输入资源验证规则
+
+**【重要】必须验证所有输入资源是否完整**：
+
+**1. 验证 chapter_outline 完整性**：
+```python
+def validate_chapter_outline(chapter_outline):
+    """验证章节大纲包含所有必要字段"""
+    required_fields = [
+        "chapter_number",
+        "title",
+        "summary",
+        "word_count_target",
+        "conflict_stage",
+        "key_plot_points",
+        "ending_hook_type"
+    ]
+
+    for field in required_fields:
+        if field not in chapter_outline:
+            raise Error(f"chapter_outline 缺少必需字段：{field}")
+
+    # 验证 key_plot_points 不为空
+    if not chapter_outline.get("key_plot_points"):
+        raise Error("key_plot_points 不能为空")
+
+    # 验证章节号有效
+    if chapter_outline["chapter_number"] < 1:
+        raise Error("chapter_number 必须 >= 1")
+```
+
+**2. 验证 character_state_tracker 完整性**：
+```python
+def validate_character_state_tracker(character_state_tracker):
+    """验证人物状态追踪器包含所有必要字段"""
+    if not character_state_tracker:
+        raise Error("character_state_tracker 不能为空")
+
+    for character_name, state in character_state_tracker.items():
+        required_fields = [
+            "met_people",
+            "relationships",
+            "emotional_trajectory",
+            "character_arc_stage",
+            "key_events_impact"
+        ]
+
+        for field in required_fields:
+            if field not in state:
+                raise Error(f"人物 {character_name} 的状态缺少字段：{field}")
+
+        # 验证 met_people 是列表
+        if not isinstance(state["met_people"], list):
+            raise Error(f"人物 {character_name} 的 met_people 必须是列表")
+
+        # 验证 relationships 是字典
+        if not isinstance(state["relationships"], dict):
+            raise Error(f"人物 {character_name} 的 relationships 必须是字典")
+```
+
+**3. 验证 character_arc_mapping 完整性**：
+```python
+def validate_character_arc_mapping(character_arc_mapping):
+    """验证人物弧光映射包含所有必要字段"""
+    if not character_arc_mapping:
+        raise Error("character_arc_mapping 不能为空")
+
+    for character_name, arc in character_arc_mapping.items():
+        required_stages = ["start", "middle", "end"]
+
+        for stage in required_stages:
+            if stage not in arc:
+                raise Error(f"人物 {character_name} 缺少 {stage} 阶段定义")
+
+            stage_data = arc[stage]
+            required_fields = ["chapters", "state"]
+
+            for field in required_fields:
+                if field not in stage_data:
+                    raise Error(f"人物 {character_name} 的 {stage} 阶段缺少字段：{field}")
+```
+
+**4. 验证 previous_content 合理性**：
+```python
+def validate_previous_content(previous_content, chapter_number):
+    """验证前文内容"""
+    # 第1章：previous_content 可以为空字符串或 None
+    if chapter_number == 1:
+        if previous_content is not None and previous_content != "":
+            raise Error(f"第1章的 previous_content 应该为空或 None")
+
+    # 第2章起：previous_content 必须不为空
+    if chapter_number > 1:
+        if not previous_content or len(previous_content.strip()) < 100:
+            raise Error(f"第{chapter_number}章：previous_content 过短或为空")
+```
+
+**5. 验证所有输入组合**：
+```python
+def validate_all_inputs(chapter_number, chapter_outline, character_state_tracker,
+                        character_arc_mapping, previous_content, work_dir):
+    """综合验证所有输入"""
+    print(f"【验证】第{chapter_number}章输入资源...")
+
+    # 验证章节大纲
+    validate_chapter_outline(chapter_outline)
+    print(f"  ✓ chapter_outline 完整")
+
+    # 验证人物状态
+    validate_character_state_tracker(character_state_tracker)
+    print(f"  ✓ character_state_tracker 完整")
+
+    # 验证人物弧光
+    validate_character_arc_mapping(character_arc_mapping)
+    print(f"  ✓ character_arc_mapping 完整")
+
+    # 验证前文内容
+    validate_previous_content(previous_content, chapter_number)
+    print(f"  ✓ previous_content 合理")
+
+    # 验证工作目录
+    if not work_dir:
+        raise Error("work_dir 不能为空")
+    print(f"  ✓ work_dir 有效：{work_dir}")
+
+    print(f"【验证通过】第{chapter_number}章所有资源完整")
+```
+
+**6. 使用示例（在 novelist-author 执行开始时调用）**：
+```python
+# novelist-author 技能执行开始时
+validate_all_inputs(
+    chapter_number=input["chapter_outline"]["chapter_number"],
+    chapter_outline=input["chapter_outline"],
+    character_state_tracker=input.get("character_state_tracker", {}),
+    character_arc_mapping=input.get("character_arc_mapping", {}),
+    previous_content=input.get("previous_content", ""),
+    work_dir=input.get("work_dir", "")
+)
+```
+
 ## 注意事项
 
 1. 字数控制在 800-1000 字
@@ -355,3 +504,5 @@ ICU 门外，消毒水的味道刺鼻。
 6. 节奏紧凑，无长铺垫
 7. 章末必须有钩子
 8. 保持风格统一
+9. **【重要】必须使用所有输入资源，不得跳过**
+10. **【重要】输出必须包含 character_state_update**

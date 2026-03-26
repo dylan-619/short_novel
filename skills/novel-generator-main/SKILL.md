@@ -245,10 +245,29 @@ description: 小说生成主入口 - 自动化完成小说生成流程，支持�
 
 **调用技能**: `/novel-step-04-chapter-writer`
 
+**【警告】这是强制性规则，违反会导致数据损坏和逻辑错误**
+
 **【绝对禁止并行】**：
 - ❌ 禁止使用 subagent/parallel agents 同时写多章
+- ❌ 禁止开启多个线程/进程并行写章节
 - ❌ 禁止一次生成多章内容
+- ❌ 禁止批量生成章节后再补充子技能
 - ✅ **必须严格按顺序**：第1章完成后才能写第2章
+
+**【每章必须完整执行的流程】**：
+```
+第N章：
+1. novelist-author（作家）→ 等待结果
+2. word-count-controller（字数控制）→ 等待结果
+3. hook-crafter（钩子师）→ 等待结果
+4. character-consistency-checker（人物一致性检查）→ 等待结果
+5. 保存 temp_chapter_XX.md 文件
+6. 保存 temp_chapter_XX_meta.json 文件
+7. editor-reviewer（编辑审核）→ 等待结果
+8. reader-feedback（读者反馈）→ 等待结果
+9. 更新 character_state_history.json 备份
+→ 章节完成，才能开始下一章
+```
 
 **循环**: 根据配置的章节数（默认20次），**必须顺序执行**
 
@@ -615,3 +634,363 @@ description: 小说生成主入口 - 自动化完成小说生成流程，支持�
 - 字数: 3.6万-4.5万字
 - 章节: 30章
 - 每章字数: 1200-1500字
+
+---
+
+## 【关键】强制执行监控机制
+
+### 执行前验证
+
+**validate_input_parameters(input)**
+- 验证所有输入参数的完整性
+- 检查配置参数的合理性
+
+```python
+def validate_input_parameters(input):
+    """
+    验证输入参数
+    """
+    # 验证输出目录
+    output_dir = input.get("output_dir", "./outputs")
+    if not output_dir:
+        raise Error("输出目录不能为空")
+
+    # 验证配置参数
+    config = input.get("config", {})
+    target_chapters = config.get("target_chapters", 20)
+    chapter_word_min = config.get("chapter_word_min", 800)
+    chapter_word_max = config.get("chapter_word_max", 1000)
+
+    if target_chapters < 1:
+        raise Error(f"章节数必须 >= 1，当前值：{target_chapters}")
+
+    if chapter_word_min <= 0:
+        raise Error(f"每章最少字数必须 > 0，当前值：{chapter_word_min}")
+
+    if chapter_word_max < chapter_word_min:
+        raise Error(f"每章最多字数必须 >= 最少字数，当前值：{chapter_word_max} < {chapter_word_min}")
+
+    print(f"【验证通过】输入参数有效")
+    return True
+```
+
+### 执行中监控
+
+**monitor_step_execution(step_name, output, expected_fields)**
+- 监控每个步骤的执行结果
+- 验证输出字段的完整性
+
+```python
+def monitor_step_execution(step_name, output, expected_fields):
+    """
+    监控步骤执行结果
+    """
+    print(f"\n【监控】{step_name} 执行结果检查...")
+
+    if not output:
+        raise Error(f"{step_name} 输出为空")
+
+    for field in expected_fields:
+        if field not in output:
+            raise Error(f"{step_name} 输出缺少字段：{field}")
+
+    print(f"  ✓ {step_name} 输出完整")
+    return True
+```
+
+### 章节写作监控
+
+**monitor_chapter_writing(work_dir, total_chapters)**
+- 监控章节写作进度
+- 验证每章完成状态
+
+```python
+def monitor_chapter_writing(work_dir, total_chapters):
+    """
+    监控章节写作进度
+    """
+    print(f"\n【监控】章节写作进度检查...")
+
+    # 检查所有章节的完成状态
+    completed_chapters = []
+    missing_files = []
+
+    for chapter_num in range(1, total_chapters + 1):
+        chapter_file = f"{work_dir}/temp_chapter_{chapter_num}.md"
+        meta_file = f"{work_dir}/temp_chapter_{chapter_num}_meta.json"
+
+        if os.path.exists(chapter_file) and os.path.exists(meta_file):
+            completed_chapters.append(chapter_num)
+        else:
+            missing_files.append(chapter_num)
+
+    if missing_files:
+        raise Error(f"以下章节未完成：{missing_files}")
+
+    print(f"  ✓ 所有{total_chapters}章已完成")
+    return True
+```
+
+### 执行后验证
+
+**validate_output_files(novel_info, output_files)**
+- 验证所有输出文件的完整性
+- 确保文件路径正确
+
+```python
+def validate_output_files(novel_info, output_files):
+    """
+    验证输出文件完整性
+    """
+    print(f"\n【验证】输出文件完整性检查...")
+
+    # 验证小说文件
+    novel_file = output_files.get("novel_file")
+    if not novel_file or not os.path.exists(novel_file):
+        raise Error(f"小说文件不存在：{novel_file}")
+
+    # 验证元数据文件
+    meta_file = output_files.get("meta_file")
+    if not meta_file or not os.path.exists(meta_file):
+        raise Error(f"元数据文件不存在：{meta_file}")
+
+    # 验证工作目录
+    work_dir = output_files.get("work_dir")
+    if not work_dir or not os.path.exists(work_dir):
+        raise Error(f"工作目录不存在：{work_dir}")
+
+    print(f"  ✓ 所有输出文件完整")
+    return True
+```
+
+### 质量评分监控
+
+**validate_quality_scores(quality_reports)**
+- 验证所有质量评分的合理性
+- 计算最终质量评分
+
+```python
+def validate_quality_scores(quality_reports):
+    """
+    验证质量评分
+    """
+    print(f"\n【验证】质量评分检查...")
+
+    # 验证各步骤评分
+    step_scores = []
+
+    if "plot_optimizer" in quality_reports:
+        optimizer = quality_reports["plot_optimizer"]
+        if "rhythm_score" in optimizer:
+            step_scores.append(optimizer["rhythm_score"])
+        if "conflict_density" in optimizer:
+            step_scores.append(optimizer["conflict_density"])
+        if "hook_strength" in optimizer:
+            step_scores.append(optimizer["hook_strength"])
+
+    if "tone_consistency" in quality_reports:
+        tone = quality_reports["tone_consistency"]
+        if "overall_score" in tone:
+            step_scores.append(tone["overall_score"])
+
+    if "conflict_checker" in quality_reports:
+        conflict = quality_reports["conflict_checker"]
+        if "overall_score" in conflict:
+            step_scores.append(conflict["overall_score"])
+
+    # 计算平均分
+    if step_scores:
+        avg_score = sum(step_scores) / len(step_scores)
+        print(f"  ✓ 质量评分：{avg_score:.2f}")
+
+        # 如果评分过低，发出警告
+        if avg_score < 7.0:
+            print(f"  ⚠ 警告：质量评分偏低（{avg_score:.2f}），建议重新生成")
+    else:
+        print(f"  ⚠ 警告：缺少质量评分数据")
+
+    return True
+```
+
+### 完整执行流程（带监控）
+
+```python
+def execute_with_monitoring(input):
+    """
+    带完整监控的执行流程
+    """
+    print(f"\n{'#'*60}")
+    print(f"# 小说生成系统启动")
+    print(f"{'#'*60}\n")
+
+    # ========== 执行前验证 ==========
+    print("=" * 60)
+    print("【执行前】参数验证...")
+    print("=" * 60)
+    validate_input_parameters(input)
+
+    # ========== 步骤1: 选题师 ==========
+    print("\n" + "=" * 60)
+    print("【步骤1/8】选题师 (novel-step-01-topic-selector)")
+    print("=" * 60)
+
+    topic_input = {
+        "user_preference": input.get("user_preference", "all"),
+        "specific_genre": input.get("specific_genre"),
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+    }
+
+    topic_output = Skill("novel-step-01-topic-selector", args=json.dumps(topic_input))
+    monitor_step_execution("topic-selector", topic_output,
+                        ["title", "category", "core_conflict", "characters"])
+
+    # ========== 步骤2: 大纲师 ==========
+    print("\n" + "=" * 60)
+    print("【步骤2/8】大纲师 (novel-step-02-outline-designer)")
+    print("=" * 60)
+
+    outline_input = {
+        "topic": topic_output,
+        "config": input.get("config", {}),
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+    }
+
+    outline_output = Skill("novel-step-02-outline-designer", args=json.dumps(outline_input))
+    monitor_step_execution("outline-designer", outline_output,
+                        ["total_chapters", "chapters", "character_arc"])
+
+    # 提取工作目录
+    work_dir = outline_output.get("work_dir", "./outputs/novel/work/")
+
+    # ========== 步骤3: 编辑审核 ==========
+    print("\n" + "=" * 60)
+    print("【步骤3/8】编辑审核 (novel-step-03-editor-reviewer)")
+    print("=" * 60)
+
+    editor_input = {
+        "content_type": "outline",
+        "outline": outline_output,
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+    }
+
+    editor_output = Skill("novel-step-03-editor-reviewer", args=json.dumps(editor_input))
+    monitor_step_execution("editor-reviewer", editor_output,
+                        ["status", "score"])
+
+    if editor_output["status"] != "pass":
+        raise Error("大纲审核未通过，需要重新设计")
+
+    # ========== 步骤4: 章节写手 ==========
+    print("\n" + "=" * 60)
+    print("【步骤4/8】章节写手 (novel-step-04-chapter-writer)")
+    print("=" * 60)
+    print(f"【警告】必须严格按顺序执行，禁止并行！")
+
+    # 【关键】章节写手必须按顺序执行
+    # 每章必须完成所有子技能后才能写下一章
+    chapter_writer_input = {
+        "outline": outline_output,
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+    }
+
+    chapter_writer_output = Skill("novel-step-04-chapter-writer", args=json.dumps(chapter_writer_input))
+
+    # 【监控】验证所有章节完成
+    monitor_chapter_writing(work_dir, outline_output["total_chapters"])
+
+    # ========== 步骤5: 情节优化师 ==========
+    print("\n" + "=" * 60)
+    print("【步骤5/8】情节优化师 (novel-step-05-plot-optimizer)")
+    print("=" * 60)
+
+    plot_optimizer_input = {
+        "chapters": chapter_writer_output,
+        "outline": outline_output,
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+)
+    }
+
+    plot_optimizer_output = Skill("novel-step-05-plot-optimizer", args=json.dumps(plot_optimizer_input))
+    monitor_step_execution("plot-optimizer", plot_optimizer_output,
+                        ["rhythm_score", "conflict_density", "hook_strength"])
+
+    # ========== 步骤6: 基调维持 ==========
+    print("\n" + "=" * 60)
+    print("【步骤6/8】基调维持 (novel-step-06-tone-consistency)")
+    print("=" * 60)
+
+    tone_input = {
+        "chapters": chapter_writer_output,
+        "outline": outline_output,
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+    }
+
+    tone_output = Skill("novel-step-06-tone-consistency", args=json.dumps(tone_input))
+    monitor_step_execution("tone-consistency", tone_output,
+                        ["overall_score"])
+
+    # ========== 步骤7: 冲突检查 ==========
+    print("\n" + "=" * 60)
+    print("【步骤7/8】冲突检查 (novel-step-07-conflict-checker)")
+    print("=" * 60)
+
+    conflict_input = {
+        "chapters": chapter_writer_output,
+        "outline": outline_output,
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+    }
+
+    conflict_output = Skill("novel-step-07-conflict-checker", args=json.dumps(conflict_input))
+    monitor_step_execution("conflict-checker", conflict_output,
+                        ["overall_score", "core_conflict_mapping"])
+
+    # ========== 步骤8: 最终汇编 ==========
+    print("\n" + "=" * 60)
+    print("【步骤8/8】最终汇编 (novel-step-08-final-compiler)")
+    print("=" * 60)
+
+    compiler_input = {
+        "all_chapters": chapter_writer_output,
+        "outline": outline_output,
+        "meta": {
+            "novel_title": topic_output.get("title", ""),
+            "category": topic_output.get("category", ""),
+            "estimated_words": outline_output.get("estimated_words", 0),
+            "target_chapters": outline_output.get("total_chapters", 20)
+        },
+        "quality_reports": {
+            "plot_optimizer": plot_optimizer_output,
+            "tone_consistency": tone_output,
+            "conflict_checker": conflict_output
+        },
+        "work_dir": work_dir,
+        "reference_path": input.get("reference_path", "./docs/参考资料.md")
+    }
+
+    compiler_output = Skill("novel-step-08-final-compiler", args=json.dumps(compiler_input))
+
+    # 【监控】验证输出文件
+    validate_output_files(compiler_output.get("novel_info", {}), compiler_output.get("output_files", {}))
+
+    # ========== 执行后验证 ==========
+    print("\n" + "=" * 60)
+    print("【执行后】质量验证...")
+    print("=" * 60)
+    validate_quality_scores(compiler_output.get("quality_reports", {}))
+
+    # ========== 完成 ==========
+    print(f"\n{'#'*60}")
+    print(f"# 小说生成完成")
+    print(f"# 书名：{topic_output.get('title', '')}")
+    print(f"# 字数：{outline_output.get('estimated_words', 0)}")
+    print(f"# 章节：{outline_output.get('total_chapters', 0)}")
+    print(f"{'#'*60}\n")
+
+    return {
+        "status": "completed",
+        "novel_info": compiler_output.get("novel_info", {}),
+        "generation_log": {...},
+        "quality_reports": compiler_output.get("quality_reports", {}),
+        "output_files": compiler_output.get("output_files", {})
+    }
+```
